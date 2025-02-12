@@ -1,0 +1,49 @@
+eval "$(/opt/homebrew/bin/brew shellenv)"  ## if you are using the  Mac Os or homebrew package manager .
+
+export EDITOR=nano
+
+for subnet in 2 5 7 8 9; do
+    for num in {1..254}; do
+        eval "function q${subnet}${num}() { ssh root@10.150.${subnet}.$num; }"
+    done
+done
+
+
+for num in {1..254}; do
+    eval "function i$num() { ssh root@192.168.4.$num; }"
+done
+
+for num in {1..254}; do
+    eval "function p$num() { ssh root@10.110.110.$num; }"
+done
+
+
+
+# Get the IP address (IPv4) for macOS
+
+THEIP=$(ifconfig en0 | grep 'inet ' | awk '{print $2}')
+if [ -z "$THEIP" ]; then
+    THEIP="No-IP"
+fi
+
+
+## uncomment the below 4 lines  and  comment the above four lines if you are using the linux system
+
+######     THEIP=$(ip -4 -o addr show scope global | awk '{print $4}' | cut -d/ -f1 | head -n 1)        ## this section if you use the linux
+######      if [ -z "$THEIP" ]; then        ## this section if you use the linux
+######         THEIP="No-IP"        ## this section if you use the linux
+######     fi        ## this section if you use the linux
+
+
+# Get the hostname
+HOSTNAME=$(hostname)
+
+# Customize the PS1 prompt
+PS1="\[\e[33;1;31m\][\u@$HOSTNAME ($THEIP) \w] \[\e[0m\] "
+export PS1
+
+# Export the IP address as an environment variable
+MY_IP_ADDRESS=$THEIP
+export MY_IP_ADDRESS
+
+alias nano='nano -l'
