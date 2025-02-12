@@ -1,4 +1,6 @@
-eval "$(/opt/homebrew/bin/brew shellenv)"  ## if you are using the  Mac Os or homebrew package manager .
+
+## if you are using the  Mac Os or homebrew package manager  please uncomment the below file .
+####eval "$(/opt/homebrew/bin/brew shellenv)"
 
 export EDITOR=nano
 

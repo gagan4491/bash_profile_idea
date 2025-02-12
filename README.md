@@ -65,7 +65,7 @@ done
 #### 🔹 **For IP Range: `10.10.10.X`**
 ```sh
 for num in {1..254}; do
-    eval "function p$num() { ssh root@10.110.110.$num; }"
+    eval "function p$num() { ssh root@10.10.10.$num; }"
 done
 ```
 ✅ **Creates SSH functions like:**  
